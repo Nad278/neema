@@ -12,7 +12,7 @@ Competing on outcomes, not tools. A person describes a business in one sentence;
 - Claude API for the AI layer, called server-side only — to be added
 
 ## Roadmap
-1. [x] Foundation: Next.js + Tailwind app, old portfolio site moved to `archive/`
+1. [x] Foundation: Next.js + Tailwind app
 2. [ ] Landing page + waitlist
 3. [ ] Setup Wizard prototype (one sentence in, business plan out)
 4. [ ] Shop/site generator
