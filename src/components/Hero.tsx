@@ -12,14 +12,14 @@ const content = {
   start: {
     line1: "Open for",
     line2: "business.",
-    sub: "Say what you'll sell. Get a shop, a till and a plan.",
+    sub: "Tell Origo what you want to sell. It builds your online shop, your till for taking payments, and a 30-day plan to your first sale.",
     placeholder: "e.g. I want to sell cakes",
     chips: ["Café", "Salon", "Online store", "Bakery"],
   },
   existing: {
     line1: "Your business,",
     line2: "one screen.",
-    sub: "Website, bookings, payments and numbers in one app.",
+    sub: "Origo puts your website, bookings, payments and daily numbers in one app, with an AI coach that suggests what to do next. You approve everything.",
     placeholder: "e.g. I run a 12-room guesthouse",
     chips: ["Shop", "Hotel", "Restaurant", "Clinic"],
   },
@@ -37,7 +37,7 @@ export default function Hero() {
   }
 
   return (
-    <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-6 pb-16 pt-6 lg:grid-cols-[1.25fr_1fr] lg:pb-24">
+    <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-6 pb-16 pt-6 lg:grid-cols-[1.2fr_1fr] lg:pb-24">
       <div>
         <div
           role="tablist"
@@ -66,13 +66,13 @@ export default function Hero() {
 
         <h1
           key={mode}
-          className="animate-pop mt-8 text-[clamp(3.25rem,9.5vw,8.25rem)] font-extrabold leading-[0.88] tracking-[-0.04em]"
+          className="animate-pop mt-8 text-[clamp(2.5rem,5.5vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.03em]"
         >
           {c.line1}
           <br />
           <span className="text-accent">{c.line2}</span>
         </h1>
-        <p className="mt-7 max-w-lg text-lg text-foreground/70">{c.sub}</p>
+        <p className="mt-6 max-w-xl text-lg text-foreground/70">{c.sub}</p>
 
         <form onSubmit={submit} className="mt-8 flex max-w-lg flex-col gap-3 sm:flex-row">
           <input
