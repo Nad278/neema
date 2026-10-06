@@ -11,16 +11,20 @@ const examples = [
   "A phone repair shop",
 ];
 
+export const IDEA_EVENT = "origo:idea";
+
 export default function HeroForm() {
   const [idea, setIdea] = useState("");
 
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent(IDEA_EVENT, { detail: idea }));
+    document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
     <div className="mt-10 max-w-2xl">
-      <form
-        id="waitlist"
-        onSubmit={(e) => e.preventDefault()}
-        className="flex flex-col gap-3 sm:flex-row"
-      >
+      <form onSubmit={submit} className="flex flex-col gap-3 sm:flex-row">
         <input
           type="text"
           value={idea}
@@ -34,7 +38,7 @@ export default function HeroForm() {
           type="submit"
           className="rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white hover:bg-emerald-700"
         >
-          Start my business
+          Get early access
         </button>
       </form>
 

@@ -13,7 +13,8 @@ Competing on outcomes, not tools. A person describes a business in one sentence;
 
 ## Roadmap
 1. [x] Foundation: Next.js + Tailwind app
-2. [ ] Landing page + waitlist
+2. [x] Landing page + waitlist form (saving needs Supabase set up, see below)
+   - Market research: `docs/market-research.md`
 3. [ ] Setup Wizard prototype (one sentence in, business plan out)
 4. [ ] Shop/site generator
 5. [ ] Simple POS (products, sales, receipts, daily totals)
@@ -27,3 +28,11 @@ npm run dev     # http://localhost:3000
 npm run lint
 npm run build
 ```
+
+## Waitlist setup (Supabase)
+1. Create a free project at supabase.com.
+2. In the SQL editor, run `supabase/waitlist.sql`.
+3. Copy `.env.example` to `.env.local` and fill in `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (Project Settings, API).
+4. Restart `npm run dev`. The form on the landing page now saves emails.
+
+Without these variables the form shows "The waitlist isn't open yet" instead of pretending to save.
