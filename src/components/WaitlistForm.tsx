@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { IDEA_EVENT } from "./HeroForm";
+import { IDEA_EVENT } from "@/lib/events";
 
 type Status = "idle" | "sending" | "done" | "error";
 

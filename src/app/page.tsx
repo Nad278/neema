@@ -1,14 +1,9 @@
-import HeroForm from "@/components/HeroForm";
-import { CoachPreview, PosPreview, WizardPreview } from "@/components/Mockups";
+import ControlCenter from "@/components/ControlCenter";
+import ExistingPreview from "@/components/ExistingPreview";
+import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Section from "@/components/Section";
 import WaitlistForm from "@/components/WaitlistForm";
-
-const promises = [
-  "Your shop and website, built for you",
-  "A point of sale for cash, card and mobile payments",
-  "A 30-day plan to your first paying customer",
-];
 
 const problems = [
   {
@@ -100,13 +95,38 @@ const plans = [
   },
 ];
 
-const audiences = [
-  ["Food and drink", "Cafés, bakeries, food stalls, caterers"],
-  ["Beauty and wellness", "Salons, barbers, spas, nail studios"],
-  ["Fashion and retail", "Boutiques, tailors, online clothing stores"],
-  ["Repair and trade", "Phone repair, mechanics, electricians, cleaners"],
-  ["Online sellers", "Handmade goods, resellers, social-media shops"],
-  ["Services and freelancers", "Tutors, photographers, consultants"],
+const existingSteps = [
+  { title: "Tell us about your business", text: "Name, type, location. Or paste the link to your current page." },
+  { title: "Add what you sell", text: "Upload a menu, price list, room list or spreadsheet. Photos work too." },
+  { title: "Go live", text: "Origo builds your website with booking and payments, and connects it to your dashboard." },
+];
+
+const verticals = [
+  {
+    name: "Hotels & guesthouses",
+    items: ["Live room board", "Online booking with deposits", "Housekeeping tasks", "Seasonal rates"],
+  },
+  {
+    name: "Shops & retail",
+    items: ["POS and online store", "Stock with reorder alerts", "Barcode scanning", "Supplier orders"],
+  },
+  {
+    name: "Restaurants & cafés",
+    items: ["QR menu and table ordering", "Kitchen screen", "Ingredient stock", "Daily specials"],
+  },
+  {
+    name: "Salons & clinics",
+    items: ["Appointment calendar", "Reminders that cut no-shows", "Staff schedules", "Client history"],
+  },
+];
+
+const everywhere = [
+  "AI manager that starts your day with a briefing",
+  "Staff accounts and permissions",
+  "Many locations in one view",
+  "Invoices, expenses and tax-ready reports",
+  "Loyalty and win-back offers",
+  "Alerts when something needs attention",
 ];
 
 const principles = [
@@ -134,6 +154,10 @@ const faqs = [
     a: "Not yet. We're building it step by step and opening to waitlist members first.",
   },
   {
+    q: "I already run a business. Can I use Origo?",
+    a: "Yes, that's one of the two main paths. You bring your details, menu or price list, and Origo builds your website, booking and payments, and gives you one dashboard to run everything.",
+  },
+  {
     q: "Who is it for?",
     a: "First-time and small business owners anywhere in the world: shops, cafés, salons, online sellers, repair and service businesses.",
   },
@@ -157,48 +181,7 @@ export default function Home() {
       <Navbar />
 
       <main>
-        {/* Hero */}
-        <div className="relative overflow-hidden">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-40 left-1/2 h-[32rem] w-[48rem] -translate-x-1/2 rounded-full bg-emerald-500/15 blur-3xl"
-          />
-          <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-6 py-16 sm:py-24 lg:grid-cols-2">
-            <div>
-              <p className="inline-block rounded-full bg-emerald-600/10 px-4 py-1 text-sm font-semibold text-emerald-600">
-                For first-time and small business owners, anywhere in the world
-              </p>
-              <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-6xl">
-                From idea to your first sale in{" "}
-                <span className="text-emerald-500">10 minutes.</span>
-              </h1>
-              <p className="mt-6 text-lg text-foreground/70">
-                Tell Origo the business you want to start. It sets everything up, shows you what
-                to do next, and then helps you run and grow it.
-              </p>
-              <ul className="mt-6 space-y-2 text-foreground/80">
-                {promises.map((p) => (
-                  <li key={p} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs text-white">
-                      ✓
-                    </span>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-              <HeroForm />
-              <p className="mt-6 text-sm text-foreground/50">
-                Origo is in development. Join the waitlist for early access.
-              </p>
-            </div>
-            <div className="relative">
-              <WizardPreview />
-              <p className="mt-3 text-center text-xs text-foreground/40">
-                Preview of a planned screen, with sample data.
-              </p>
-            </div>
-          </div>
-        </div>
+        <Hero />
 
         {/* Problem */}
         <Section
@@ -234,28 +217,77 @@ export default function Home() {
           </ol>
         </Section>
 
-        {/* Preview */}
+        {/* Live demo */}
         <Section
-          id="preview"
-          eyebrow="See it in action"
-          title="What running your business with Origo looks like"
-          intro="Planned screens, shown with sample data. The real product is being built step by step."
+          id="demo"
+          eyebrow="Try it"
+          title="Run a whole business from one screen"
+          intro="Whether it's a shop, a hotel or a salon, you see sales, stock, bookings and money in one place, and the AI coach points out what needs attention. Click around, it works."
         >
-          <div className="grid gap-6 lg:grid-cols-2">
+          <ControlCenter />
+        </Section>
+
+        {/* Existing business */}
+        <Section
+          id="existing"
+          eyebrow="Already have a business?"
+          title="Bring what you have online in three steps"
+          intro="No need to start from zero. Keep your customers, prices and way of working. Origo adds the website, booking, payments and control."
+        >
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <ol className="space-y-4">
+              {existingSteps.map((st, i) => (
+                <li key={st.title} className="flex gap-4 rounded-2xl border border-foreground/10 p-5">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-600 font-bold text-white">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-bold">{st.title}</h3>
+                    <p className="mt-1 text-sm text-foreground/70">{st.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
             <div>
-              <PosPreview />
-              <h3 className="mt-4 font-bold">Sell in person or online</h3>
-              <p className="mt-1 text-sm text-foreground/70">
-                Ring up a sale in seconds. Cash, card or mobile, with stock and receipts handled for you.
+              <ExistingPreview />
+              <p className="mt-3 text-center text-xs text-foreground/40">
+                Preview of a planned screen, with sample data.
               </p>
             </div>
-            <div>
-              <CoachPreview />
-              <h3 className="mt-4 font-bold">A coach that reads your numbers</h3>
-              <p className="mt-1 text-sm text-foreground/70">
-                Clear suggestions each week based on your real sales. Approve with one tap.
-              </p>
-            </div>
+          </div>
+        </Section>
+
+        {/* Big ideas */}
+        <Section
+          eyebrow="Built for your kind of business"
+          title="One control center, tuned to how you work"
+          intro="Origo adapts to your business type. These are the features we plan to build, starting with the shop basics."
+        >
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {verticals.map((v) => (
+              <div key={v.name} className="rounded-2xl border border-foreground/10 p-5">
+                <h3 className="font-bold">{v.name}</h3>
+                <ul className="mt-3 space-y-1.5 text-sm text-foreground/70">
+                  {v.items.map((i) => (
+                    <li key={i} className="flex gap-2">
+                      <span className="text-emerald-600">•</span>
+                      {i}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 rounded-2xl bg-foreground/[0.04] p-6">
+            <h3 className="font-bold">For every business</h3>
+            <ul className="mt-3 grid gap-2 text-sm text-foreground/70 sm:grid-cols-2 lg:grid-cols-3">
+              {everywhere.map((i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="text-emerald-600">✓</span>
+                  {i}
+                </li>
+              ))}
+            </ul>
           </div>
         </Section>
 
@@ -271,21 +303,6 @@ export default function Home() {
               <div key={t.name} className="rounded-2xl border border-foreground/10 p-6 transition hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-900/5">
                 <h3 className="font-semibold">{t.name}</h3>
                 <p className="mt-2 text-sm text-foreground/70">{t.text}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* Audience */}
-        <Section
-          eyebrow="Who it's for"
-          title="Built for people starting and running small businesses"
-        >
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {audiences.map(([t, d]) => (
-              <div key={t} className="rounded-2xl border border-foreground/10 p-5">
-                <h3 className="font-bold">{t}</h3>
-                <p className="mt-1 text-sm text-foreground/70">{d}</p>
               </div>
             ))}
           </div>
