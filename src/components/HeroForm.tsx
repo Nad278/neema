@@ -29,7 +29,7 @@ export default function HeroForm() {
           type="text"
           value={idea}
           onChange={(e) => setIdea(e.target.value)}
-          placeholder="Describe your business, e.g. I want to sell homemade snacks"
+          placeholder="e.g. I want to sell cakes"
           aria-label="Describe your business"
           suppressHydrationWarning
           className="flex-1 rounded-xl border border-foreground/20 bg-transparent px-4 py-3 outline-none focus:border-emerald-600"

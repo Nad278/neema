@@ -1,4 +1,5 @@
 import HeroForm from "@/components/HeroForm";
+import { CoachPreview, PosPreview, WizardPreview } from "@/components/Mockups";
 import Navbar from "@/components/Navbar";
 import Section from "@/components/Section";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -99,6 +100,34 @@ const plans = [
   },
 ];
 
+const audiences = [
+  ["Food and drink", "Cafés, bakeries, food stalls, caterers"],
+  ["Beauty and wellness", "Salons, barbers, spas, nail studios"],
+  ["Fashion and retail", "Boutiques, tailors, online clothing stores"],
+  ["Repair and trade", "Phone repair, mechanics, electricians, cleaners"],
+  ["Online sellers", "Handmade goods, resellers, social-media shops"],
+  ["Services and freelancers", "Tutors, photographers, consultants"],
+];
+
+const principles = [
+  {
+    title: "You stay in control",
+    text: "The AI suggests, you approve. Anything involving money or messages to customers waits for your OK.",
+  },
+  {
+    title: "Everything is logged",
+    text: "A clear record of what the AI did and why, so you can always check and undo.",
+  },
+  {
+    title: "Your data is yours",
+    text: "Your sales, customers and numbers belong to you, and you can export them any time.",
+  },
+  {
+    title: "Works where you work",
+    text: "Built mobile-first for real shops, including patchy internet. Payments through licensed partners, with more local options added by country.",
+  },
+];
+
 const faqs = [
   {
     q: "Is Origo available now?",
@@ -129,29 +158,46 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-24">
-          <p className="inline-block rounded-full bg-emerald-600/10 px-4 py-1 text-sm font-medium text-emerald-700">
-            For first-time and small business owners, anywhere in the world
-          </p>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
-            From idea to your first sale in 10 minutes.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-foreground/70">
-            Tell Origo the business you want to start. It sets everything up,
-            shows you what to do next, and then helps you run and grow it.
-          </p>
-          <ul className="mt-8 space-y-2 text-foreground/80">
-            {promises.map((p) => (
-              <li key={p} className="flex items-start gap-3">
-                <span className="mt-1 text-emerald-600">✓</span>
-                {p}
-              </li>
-            ))}
-          </ul>
-          <HeroForm />
-          <p className="mt-6 text-sm text-foreground/50">
-            Origo is in development. Join the waitlist for early access.
-          </p>
+        <div className="relative overflow-hidden">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-40 left-1/2 h-[32rem] w-[48rem] -translate-x-1/2 rounded-full bg-emerald-500/15 blur-3xl"
+          />
+          <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-6 py-16 sm:py-24 lg:grid-cols-2">
+            <div>
+              <p className="inline-block rounded-full bg-emerald-600/10 px-4 py-1 text-sm font-semibold text-emerald-600">
+                For first-time and small business owners, anywhere in the world
+              </p>
+              <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-6xl">
+                From idea to your first sale in{" "}
+                <span className="text-emerald-500">10 minutes.</span>
+              </h1>
+              <p className="mt-6 text-lg text-foreground/70">
+                Tell Origo the business you want to start. It sets everything up, shows you what
+                to do next, and then helps you run and grow it.
+              </p>
+              <ul className="mt-6 space-y-2 text-foreground/80">
+                {promises.map((p) => (
+                  <li key={p} className="flex items-start gap-3">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs text-white">
+                      ✓
+                    </span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+              <HeroForm />
+              <p className="mt-6 text-sm text-foreground/50">
+                Origo is in development. Join the waitlist for early access.
+              </p>
+            </div>
+            <div className="relative">
+              <WizardPreview />
+              <p className="mt-3 text-center text-xs text-foreground/40">
+                Preview of a planned screen, with sample data.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Problem */}
@@ -161,7 +207,7 @@ export default function Home() {
         >
           <div className="grid gap-4 md:grid-cols-3">
             {problems.map((p) => (
-              <div key={p.title} className="rounded-2xl border border-foreground/10 p-6">
+              <div key={p.title} className="rounded-2xl border border-foreground/10 p-6 transition hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-900/5">
                 <h3 className="font-semibold">{p.title}</h3>
                 <p className="mt-2 text-sm text-foreground/70">{p.text}</p>
               </div>
@@ -177,7 +223,7 @@ export default function Home() {
         >
           <ol className="grid gap-4 md:grid-cols-3">
             {steps.map((s) => (
-              <li key={s.n} className="rounded-2xl border border-foreground/10 p-6">
+              <li key={s.n} className="rounded-2xl border border-foreground/10 p-6 transition hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-900/5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-600 font-bold text-white">
                   {s.n}
                 </span>
@@ -186,6 +232,31 @@ export default function Home() {
               </li>
             ))}
           </ol>
+        </Section>
+
+        {/* Preview */}
+        <Section
+          id="preview"
+          eyebrow="See it in action"
+          title="What running your business with Origo looks like"
+          intro="Planned screens, shown with sample data. The real product is being built step by step."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div>
+              <PosPreview />
+              <h3 className="mt-4 font-bold">Sell in person or online</h3>
+              <p className="mt-1 text-sm text-foreground/70">
+                Ring up a sale in seconds. Cash, card or mobile, with stock and receipts handled for you.
+              </p>
+            </div>
+            <div>
+              <CoachPreview />
+              <h3 className="mt-4 font-bold">A coach that reads your numbers</h3>
+              <p className="mt-1 text-sm text-foreground/70">
+                Clear suggestions each week based on your real sales. Approve with one tap.
+              </p>
+            </div>
+          </div>
         </Section>
 
         {/* Tools */}
@@ -197,9 +268,39 @@ export default function Home() {
         >
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {tools.map((t) => (
-              <div key={t.name} className="rounded-2xl border border-foreground/10 p-6">
+              <div key={t.name} className="rounded-2xl border border-foreground/10 p-6 transition hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-900/5">
                 <h3 className="font-semibold">{t.name}</h3>
                 <p className="mt-2 text-sm text-foreground/70">{t.text}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* Audience */}
+        <Section
+          eyebrow="Who it's for"
+          title="Built for people starting and running small businesses"
+        >
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {audiences.map(([t, d]) => (
+              <div key={t} className="rounded-2xl border border-foreground/10 p-5">
+                <h3 className="font-bold">{t}</h3>
+                <p className="mt-1 text-sm text-foreground/70">{d}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* Principles */}
+        <Section
+          eyebrow="Our promises"
+          title="Powerful AI, with you in charge"
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            {principles.map((p) => (
+              <div key={p.title} className="rounded-2xl bg-foreground/[0.04] p-6">
+                <h3 className="font-bold">{p.title}</h3>
+                <p className="mt-2 text-sm text-foreground/70">{p.text}</p>
               </div>
             ))}
           </div>

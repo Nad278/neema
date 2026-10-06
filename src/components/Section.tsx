@@ -12,7 +12,7 @@ export default function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto w-full max-w-5xl scroll-mt-16 px-6 py-16 sm:py-20">
+    <section id={id} className="mx-auto w-full max-w-6xl scroll-mt-16 px-6 py-16 sm:py-20">
       {eyebrow && (
         <p className="text-sm font-semibold tracking-widest text-emerald-600 uppercase">
           {eyebrow}
