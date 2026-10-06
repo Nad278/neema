@@ -1,31 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4efe6;
+  --foreground: #14110f;
+  --accent: #ff5b24;
+  --paper: #eae3d6;
+  color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-jakarta);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: var(--accent);
+  --color-paper: var(--paper);
+  --font-sans: var(--font-dmsans);
+  --font-display: var(--font-bricolage);
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-h1,
-h2,
-h3 {
-  letter-spacing: -0.02em;
 }
 
 body {
@@ -34,13 +27,19 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
 /* Motion */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(24px);
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 .reveal-in {
   opacity: 1;
@@ -52,7 +51,7 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
   }
 }
 .animate-float {
@@ -79,6 +78,19 @@ body {
 .animate-pop {
   animation: pop 0.35s ease-out both;
 }
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -90,7 +102,8 @@ body {
   }
   .animate-float,
   .caret,
-  .animate-pop {
+  .animate-pop,
+  .marquee {
     animation: none;
   }
 }

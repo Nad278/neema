@@ -1,179 +1,38 @@
 import ControlCenter from "@/components/ControlCenter";
 import ExistingPreview from "@/components/ExistingPreview";
 import Hero from "@/components/Hero";
+import { Phone } from "@/components/Mockups";
 import Navbar from "@/components/Navbar";
-import Section from "@/components/Section";
+import Reveal from "@/components/Reveal";
 import WaitlistForm from "@/components/WaitlistForm";
 
-const problems = [
-  {
-    title: "Too many tools",
-    text: "A website builder, a POS, accounting software and marketing tools. Each one has its own login, bill and learning curve.",
-  },
-  {
-    title: "Tools don't tell you what to do",
-    text: "They give you software, not direction. Most new owners get stuck on the next step, not on the technology.",
-  },
-  {
-    title: "Money problems show up late",
-    text: "Unpaid invoices and thin margins are easy to miss until cash runs short. Many small businesses close because of cash flow, not a lack of customers.",
-  },
+const marquee = [
+  "Cafés", "Hotels", "Shops", "Salons", "Bakeries", "Clinics",
+  "Restaurants", "Barbers", "Boutiques", "Guesthouses", "Repair shops", "Online stores",
 ];
 
 const steps = [
-  {
-    n: "1",
-    title: "Describe your business",
-    text: "Type one sentence, like “I want to sell homemade cakes”. No forms, no templates to pick.",
-  },
-  {
-    n: "2",
-    title: "Origo sets it up",
-    text: "It creates your shop, loads sensible products and prices into your POS, and writes your 30-day launch plan.",
-  },
-  {
-    n: "3",
-    title: "Make your first sale",
-    text: "Follow the guided mission to your first paying customer, then let the AI coach help you keep growing.",
-  },
+  ["1", "Say it", "One sentence."],
+  ["2", "Get it", "Shop, till, plan."],
+  ["3", "Sell it", "First payment."],
 ];
 
-const tools = [
-  {
-    name: "Shop & website",
-    text: "A ready-to-sell site generated from your description. Edit anything with simple drag and drop.",
-  },
-  {
-    name: "POS",
-    text: "Sell in person or online. Cash, card and mobile payments, receipts and stock, working even when the internet drops.",
-  },
-  {
-    name: "Money",
-    text: "Invoices with payment links, automatic reminders, profit in plain language, and a cash-flow forecast that warns you early.",
-  },
-  {
-    name: "Customers",
-    text: "Remember every buyer, what they bought and when. Win back the ones who stopped coming.",
-  },
-  {
-    name: "Academy",
-    text: "Short, practical lessons (pricing, promotions, reading your profit) with a button that applies each one to your own business.",
-  },
-  {
-    name: "AI coach",
-    text: "A weekly brief based on your real numbers, with decisions you approve in one tap. It never moves money without your OK.",
-  },
-];
-
-const comparison = [
-  { row: "Setup", others: "You choose and connect several tools yourself", origo: "One sentence sets up shop, POS and plan" },
-  { row: "Guidance", others: "Software only, you figure out what to do", origo: "A guided path from idea to first sale" },
-  { row: "Your data", others: "Spread across separate apps", origo: "Sales, stock, customers and money in one place" },
-  { row: "AI help", others: "Often an add-on, limited to one tool", origo: "Coach that sees the whole business" },
-  { row: "Learning", others: "Find courses elsewhere", origo: "Short lessons built in, applied to your business" },
+const tiles = [
+  { name: "Shop", text: "A site that sells.", span: "sm:col-span-2", style: "bg-paper" },
+  { name: "Till", text: "Cash, card, mobile.", span: "", style: "bg-foreground text-background" },
+  { name: "Bookings", text: "Rooms. Tables. Chairs.", span: "", style: "bg-accent" },
+  { name: "Money", text: "Profit at a glance.", span: "", style: "bg-paper" },
+  { name: "Customers", text: "Know who comes back.", span: "", style: "bg-paper" },
+  { name: "Coach", text: "Weekly moves. One tap.", span: "sm:col-span-2", style: "bg-foreground text-background" },
 ];
 
 const plans = [
-  {
-    name: "Free",
-    price: "$0",
-    note: "To get started",
-    items: ["Website and shop", "Basic POS", "First-sale mission"],
-  },
-  {
-    name: "Starter",
-    price: "$9",
-    note: "per month",
-    items: ["Everything in Free", "Invoicing and simple accounting", "Customer book", "Limited AI coach"],
-    featured: true,
-  },
-  {
-    name: "Growth",
-    price: "$29",
-    note: "per month",
-    items: ["Everything in Starter", "Full AI coach and cash-flow forecast", "Marketing tools", "All Academy lessons"],
-  },
+  { name: "Free", price: "$0", items: ["Website", "Basic till"] },
+  { name: "Starter", price: "$9", items: ["Invoices", "Customers", "Coach (lite)"], featured: true },
+  { name: "Growth", price: "$29", items: ["Full coach", "Marketing", "Lessons"] },
 ];
 
-const existingSteps = [
-  { title: "Tell us about your business", text: "Name, type, location. Or paste the link to your current page." },
-  { title: "Add what you sell", text: "Upload a menu, price list, room list or spreadsheet. Photos work too." },
-  { title: "Go live", text: "Origo builds your website with booking and payments, and connects it to your dashboard." },
-];
-
-const verticals = [
-  {
-    name: "Hotels & guesthouses",
-    items: ["Live room board", "Online booking with deposits", "Housekeeping tasks", "Seasonal rates"],
-  },
-  {
-    name: "Shops & retail",
-    items: ["POS and online store", "Stock with reorder alerts", "Barcode scanning", "Supplier orders"],
-  },
-  {
-    name: "Restaurants & cafés",
-    items: ["QR menu and table ordering", "Kitchen screen", "Ingredient stock", "Daily specials"],
-  },
-  {
-    name: "Salons & clinics",
-    items: ["Appointment calendar", "Reminders that cut no-shows", "Staff schedules", "Client history"],
-  },
-];
-
-const everywhere = [
-  "AI manager that starts your day with a briefing",
-  "Staff accounts and permissions",
-  "Many locations in one view",
-  "Invoices, expenses and tax-ready reports",
-  "Loyalty and win-back offers",
-  "Alerts when something needs attention",
-];
-
-const principles = [
-  {
-    title: "You stay in control",
-    text: "The AI suggests, you approve. Anything involving money or messages to customers waits for your OK.",
-  },
-  {
-    title: "Everything is logged",
-    text: "A clear record of what the AI did and why, so you can always check and undo.",
-  },
-  {
-    title: "Your data is yours",
-    text: "Your sales, customers and numbers belong to you, and you can export them any time.",
-  },
-  {
-    title: "Works where you work",
-    text: "Built mobile-first for real shops, including patchy internet. Payments through licensed partners, with more local options added by country.",
-  },
-];
-
-const faqs = [
-  {
-    q: "Is Origo available now?",
-    a: "Not yet. We're building it step by step and opening to waitlist members first.",
-  },
-  {
-    q: "I already run a business. Can I use Origo?",
-    a: "Yes, that's one of the two main paths. You bring your details, menu or price list, and Origo builds your website, booking and payments, and gives you one dashboard to run everything.",
-  },
-  {
-    q: "Who is it for?",
-    a: "First-time and small business owners anywhere in the world: shops, cafés, salons, online sellers, repair and service businesses.",
-  },
-  {
-    q: "Will the AI spend my money or message my customers without asking?",
-    a: "No. Anything involving money or customer contact needs your approval, and every action is logged.",
-  },
-  {
-    q: "How will you make money?",
-    a: "Mainly from a small fee on payments processed through Origo, plus optional paid plans. That's why the entry plan can be free or very cheap.",
-  },
-  {
-    q: "Are the prices final?",
-    a: "No. The prices above are our plan and may change before launch. Waitlist members will hear first.",
-  },
-];
+const dark = { "--background": "#14110f", "--foreground": "#f4efe6" } as React.CSSProperties;
 
 export default function Home() {
   return (
@@ -183,235 +42,137 @@ export default function Home() {
       <main>
         <Hero />
 
-        {/* Problem */}
-        <Section
-          eyebrow="The problem"
-          title="Starting a business is hard. Not because of the tools."
-        >
-          <div className="grid gap-4 md:grid-cols-3">
-            {problems.map((p) => (
-              <div key={p.title} className="rounded-2xl border border-foreground/10 p-6 transition hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-900/5">
-                <h3 className="font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm text-foreground/70">{p.text}</p>
-              </div>
+        {/* Marquee */}
+        <div className="overflow-hidden border-y border-foreground py-4" aria-hidden>
+          <div className="marquee font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+            {[...marquee, ...marquee].map((m, i) => (
+              <span key={i} className="mx-6 whitespace-nowrap">
+                {m} <span className="text-accent">✦</span>
+              </span>
             ))}
           </div>
-        </Section>
+        </div>
 
-        {/* How it works */}
-        <Section
-          id="how-it-works"
-          eyebrow="How it works"
-          title="Three steps from idea to first sale"
-        >
-          <ol className="grid gap-4 md:grid-cols-3">
-            {steps.map((s) => (
-              <li key={s.n} className="rounded-2xl border border-foreground/10 p-6 transition hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-900/5">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-600 font-bold text-white">
-                  {s.n}
-                </span>
-                <h3 className="mt-4 font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-foreground/70">{s.text}</p>
-              </li>
+        {/* How */}
+        <section className="mx-auto w-full max-w-6xl px-6 py-24">
+          <div className="grid gap-12 md:grid-cols-3">
+            {steps.map(([n, t, d], i) => (
+              <Reveal key={n} delay={i * 120}>
+                <p className="font-display text-8xl font-extrabold leading-none text-accent">{n}</p>
+                <h2 className="mt-4 text-4xl font-extrabold tracking-tight">{t}</h2>
+                <p className="mt-1 text-lg text-foreground/60">{d}</p>
+              </Reveal>
             ))}
-          </ol>
-        </Section>
+          </div>
+        </section>
 
-        {/* Live demo */}
-        <Section
+        {/* Demo */}
+        <section
           id="demo"
-          eyebrow="Try it"
-          title="Run a whole business from one screen"
-          intro="Whether it's a shop, a hotel or a salon, you see sales, stock, bookings and money in one place, and the AI coach points out what needs attention. Click around, it works."
+          style={dark}
+          className="scroll-mt-16 bg-background py-24 text-foreground"
         >
-          <ControlCenter />
-        </Section>
+          <div className="mx-auto w-full max-w-6xl px-6">
+            <Reveal>
+              <h2 className="text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[0.9] tracking-[-0.03em]">
+                Try it.
+              </h2>
+              <p className="mt-3 text-lg text-foreground/60">Tap anything.</p>
+            </Reveal>
+            <Reveal delay={120} className="mt-10">
+              <ControlCenter />
+            </Reveal>
+          </div>
+        </section>
 
-        {/* Existing business */}
-        <Section
-          id="existing"
-          eyebrow="Already have a business?"
-          title="Bring what you have online in three steps"
-          intro="No need to start from zero. Keep your customers, prices and way of working. Origo adds the website, booking, payments and control."
-        >
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <ol className="space-y-4">
-              {existingSteps.map((st, i) => (
-                <li key={st.title} className="flex gap-4 rounded-2xl border border-foreground/10 p-5">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-600 font-bold text-white">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 className="font-bold">{st.title}</h3>
-                    <p className="mt-1 text-sm text-foreground/70">{st.text}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <div>
+        {/* Existing */}
+        <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-2">
+          <Reveal>
+            <h2 className="text-[clamp(3rem,7vw,5.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em]">
+              Already open?
+              <br />
+              <span className="text-accent">Go online.</span>
+            </h2>
+            <p className="mt-5 max-w-sm text-lg text-foreground/70">
+              Add your menu, rooms or prices. Origo does the rest.
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <Phone>
               <ExistingPreview />
-              <p className="mt-3 text-center text-xs text-foreground/40">
-                Preview of a planned screen, with sample data.
-              </p>
-            </div>
-          </div>
-        </Section>
+            </Phone>
+          </Reveal>
+        </section>
 
-        {/* Big ideas */}
-        <Section
-          eyebrow="Built for your kind of business"
-          title="One control center, tuned to how you work"
-          intro="Origo adapts to your business type. These are the features we plan to build, starting with the shop basics."
-        >
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {verticals.map((v) => (
-              <div key={v.name} className="rounded-2xl border border-foreground/10 p-5">
-                <h3 className="font-bold">{v.name}</h3>
-                <ul className="mt-3 space-y-1.5 text-sm text-foreground/70">
-                  {v.items.map((i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="text-emerald-600">•</span>
-                      {i}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        {/* Everything */}
+        <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+          <Reveal>
+            <h2 className="text-[clamp(3rem,7vw,5.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em]">
+              One app.
+              <br />
+              Everything.
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-3 sm:grid-cols-4">
+            {tiles.map((t, i) => (
+              <Reveal key={t.name} delay={i * 80} className={t.span}>
+                <div className={`flex h-48 flex-col justify-between rounded-3xl p-6 ${t.style}`}>
+                  <h3 className="text-4xl font-extrabold tracking-tight">{t.name}</h3>
+                  <p className="text-sm opacity-70">{t.text}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
-          <div className="mt-4 rounded-2xl bg-foreground/[0.04] p-6">
-            <h3 className="font-bold">For every business</h3>
-            <ul className="mt-3 grid gap-2 text-sm text-foreground/70 sm:grid-cols-2 lg:grid-cols-3">
-              {everywhere.map((i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-emerald-600">✓</span>
-                  {i}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Section>
-
-        {/* Tools */}
-        <Section
-          id="tools"
-          eyebrow="What you get"
-          title="Everything to run the business, in one place"
-          intro="Because it's all connected, the AI coach sees your real sales, stock, customers and money, not just one slice of them."
-        >
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {tools.map((t) => (
-              <div key={t.name} className="rounded-2xl border border-foreground/10 p-6 transition hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-900/5">
-                <h3 className="font-semibold">{t.name}</h3>
-                <p className="mt-2 text-sm text-foreground/70">{t.text}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* Principles */}
-        <Section
-          eyebrow="Our promises"
-          title="Powerful AI, with you in charge"
-        >
-          <div className="grid gap-4 sm:grid-cols-2">
-            {principles.map((p) => (
-              <div key={p.title} className="rounded-2xl bg-foreground/[0.04] p-6">
-                <h3 className="font-bold">{p.title}</h3>
-                <p className="mt-2 text-sm text-foreground/70">{p.text}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* Comparison */}
-        <Section
-          eyebrow="A different approach"
-          title="Origo vs. piecing tools together"
-          intro="Website builders, POS systems and accounting apps are good at their own job. Origo is built around a different job: getting you from idea to a working, growing business."
-        >
-          <div className="overflow-x-auto rounded-2xl border border-foreground/10">
-            <table className="w-full min-w-[34rem] text-left text-sm">
-              <thead className="bg-foreground/5">
-                <tr>
-                  <th className="px-5 py-3 font-semibold"></th>
-                  <th className="px-5 py-3 font-semibold">Separate tools</th>
-                  <th className="px-5 py-3 font-semibold text-emerald-700">Origo</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparison.map((c) => (
-                  <tr key={c.row} className="border-t border-foreground/10 align-top">
-                    <td className="px-5 py-4 font-medium">{c.row}</td>
-                    <td className="px-5 py-4 text-foreground/70">{c.others}</td>
-                    <td className="px-5 py-4">{c.origo}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Section>
+        </section>
 
         {/* Pricing */}
-        <Section
-          id="pricing"
-          eyebrow="Planned pricing"
-          title="Start free. Pay as you grow."
-          intro="These prices are our plan and may change before launch. We also earn a small fee on payments processed through Origo, which is how we keep entry prices low."
+        <section id="pricing" className="mx-auto w-full max-w-6xl scroll-mt-16 px-6 pb-24">
+          <Reveal>
+            <h2 className="text-[clamp(3rem,7vw,5.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em]">
+              Start free.
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {plans.map((p, i) => (
+              <Reveal key={p.name} delay={i * 100}>
+                <div className={`border-t-2 pt-5 ${p.featured ? "border-accent" : "border-foreground"}`}>
+                  <p className="text-sm font-semibold tracking-widest uppercase">{p.name}</p>
+                  <p className="font-display text-7xl font-extrabold leading-none tracking-tight">
+                    {p.price}
+                    {p.price !== "$0" && <span className="text-xl font-medium text-foreground/50">/mo</span>}
+                  </p>
+                  <ul className="mt-4 space-y-1 text-foreground/70">
+                    {p.items.map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-8 text-sm text-foreground/50">Planned prices. May change.</p>
+        </section>
+
+        {/* CTA */}
+        <section
+          id="waitlist"
+          style={dark}
+          className="scroll-mt-16 bg-background px-6 py-24 text-center text-foreground"
         >
-          <div className="grid gap-4 md:grid-cols-3">
-            {plans.map((p) => (
-              <div
-                key={p.name}
-                className={`rounded-2xl border p-6 ${
-                  p.featured ? "border-emerald-600 ring-1 ring-emerald-600" : "border-foreground/10"
-                }`}
-              >
-                <h3 className="font-semibold">{p.name}</h3>
-                <p className="mt-3">
-                  <span className="text-4xl font-bold">{p.price}</span>{" "}
-                  <span className="text-sm text-foreground/60">{p.note}</span>
-                </p>
-                <ul className="mt-5 space-y-2 text-sm text-foreground/80">
-                  {p.items.map((i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="text-emerald-600">✓</span>
-                      {i}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* FAQ */}
-        <Section eyebrow="FAQ" title="Questions you might have">
-          <div className="max-w-3xl divide-y divide-foreground/10 rounded-2xl border border-foreground/10">
-            {faqs.map((f) => (
-              <details key={f.q} className="group px-5 py-4">
-                <summary className="cursor-pointer font-medium">{f.q}</summary>
-                <p className="mt-2 text-sm text-foreground/70">{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </Section>
-
-        {/* Final CTA */}
-        <section id="waitlist" className="scroll-mt-16 border-t border-foreground/10 px-6 py-20 text-center">
-          <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
-            Be first to start your business with Origo
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-foreground/70">
-            Join the waitlist. We&apos;ll email you when it opens. No spam.
-          </p>
-          <div className="mt-8">
-            <WaitlistForm />
-          </div>
+          <Reveal>
+            <h2 className="text-[clamp(4rem,14vw,11rem)] font-extrabold leading-[0.85] tracking-[-0.045em]">
+              Be first<span className="text-accent">.</span>
+            </h2>
+            <p className="mt-4 text-lg text-foreground/60">Join the waitlist.</p>
+            <div className="mt-8">
+              <WaitlistForm />
+            </div>
+          </Reveal>
         </section>
       </main>
 
-      <footer className="border-t border-foreground/10 px-6 py-8 text-center text-sm text-foreground/50">
-        © {new Date().getFullYear()} Origo. Early development, details may change.
+      <footer className="px-6 py-6 text-center text-xs text-foreground/50">
+        © {new Date().getFullYear()} Origo · In development
       </footer>
     </>
   );

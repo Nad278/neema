@@ -41,8 +41,8 @@ export default function WaitlistForm() {
 
   if (status === "done") {
     return (
-      <p className="rounded-xl bg-emerald-600/10 px-5 py-4 font-medium text-emerald-700">
-        You&apos;re on the list. We&apos;ll email you when Origo opens.
+      <p className="rounded-2xl bg-accent px-5 py-4 text-lg font-bold">
+        You&apos;re on the list.
       </p>
     );
   }
@@ -53,11 +53,11 @@ export default function WaitlistForm() {
         type="text"
         value={idea}
         onChange={(e) => setIdea(e.target.value)}
-        placeholder="Your business idea (optional)"
+        placeholder="Your business (optional)"
         aria-label="Your business idea"
         maxLength={500}
         suppressHydrationWarning
-        className="rounded-xl border border-foreground/20 bg-transparent px-4 py-3 outline-none focus:border-emerald-600"
+        className="rounded-full border border-background/30 bg-transparent px-5 py-3 outline-none focus:border-background"
       />
       <div className="flex flex-col gap-3 sm:flex-row">
         <input
@@ -68,18 +68,18 @@ export default function WaitlistForm() {
           placeholder="you@example.com"
           aria-label="Your email"
           suppressHydrationWarning
-          className="flex-1 rounded-xl border border-foreground/20 bg-transparent px-4 py-3 outline-none focus:border-emerald-600"
+          className="flex-1 rounded-full border border-background/30 bg-transparent px-5 py-3 outline-none focus:border-background"
         />
         <button
           type="submit"
           disabled={status === "sending"}
-          className="rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white hover:bg-emerald-700 disabled:opacity-60"
+          className="rounded-full bg-accent px-6 py-3 font-bold text-foreground hover:brightness-110 disabled:opacity-60"
         >
           {status === "sending" ? "Joining…" : "Join the waitlist"}
         </button>
       </div>
       {status === "error" && (
-        <p role="alert" className="text-sm text-red-500">
+        <p role="alert" className="text-sm text-accent">
           {message}
         </p>
       )}

@@ -26,15 +26,15 @@ function Kpi({ label, value, prefix, suffix }: { label: string; value: number; p
 function Insight({ text, action }: { text: string; action: string }) {
   const [approved, setApproved] = useState(false);
   return (
-    <div className="mt-4 rounded-xl border border-emerald-600/30 bg-emerald-600/[0.07] p-3">
-      <p className="text-xs font-semibold text-emerald-600">AI coach</p>
+    <div className="mt-4 rounded-xl border border-accent/40 bg-accent/10 p-3">
+      <p className="text-xs font-semibold text-accent">Coach</p>
       <p className="mt-1 text-sm">{text}</p>
       <button
         onClick={() => setApproved(true)}
         disabled={approved}
-        className="mt-2 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-60"
+        className="mt-2 rounded-lg bg-accent px-3 py-1.5 text-xs font-bold text-foreground disabled:opacity-60"
       >
-        {approved ? "Approved ✓ (sample)" : action}
+        {approved ? "Done ✓" : action}
       </button>
     </div>
   );
@@ -83,18 +83,18 @@ function ShopDemo() {
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
-          <p className="mb-2 text-xs font-semibold text-foreground/50">Tap an item to sell it</p>
+          <p className="mb-2 text-xs font-semibold text-foreground/50">Tap to sell</p>
           <div className="grid grid-cols-2 gap-2">
             {products.map((p) => (
               <button
                 key={p.id}
                 onClick={() => add(p.id)}
                 disabled={stock[p.id] === 0}
-                className="rounded-xl border border-foreground/15 p-3 text-left transition hover:border-emerald-600 active:scale-95 disabled:opacity-40"
+                className="rounded-xl border border-foreground/25 p-3 text-left transition hover:border-accent active:scale-95 disabled:opacity-40"
               >
                 <p className="text-sm font-semibold">{p.name}</p>
                 <p className="text-sm">${p.price}</p>
-                <p className={`text-xs ${stock[p.id] <= 3 ? "font-semibold text-amber-600" : "text-foreground/50"}`}>
+                <p className={`text-xs ${stock[p.id] <= 3 ? "font-semibold text-amber-500" : "text-foreground/50"}`}>
                   {stock[p.id]} in stock
                 </p>
               </button>
@@ -124,7 +124,7 @@ function ShopDemo() {
           <button
             onClick={charge}
             disabled={cartTotal === 0}
-            className="mt-3 rounded-lg bg-emerald-600 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:opacity-40"
+            className="mt-3 rounded-lg bg-accent py-2 text-sm font-bold text-foreground transition hover:brightness-110 disabled:opacity-40"
           >
             Charge ${cartTotal}
           </button>
@@ -135,10 +135,10 @@ function ShopDemo() {
         key={low.map((p) => p.id).join()}
         text={
           low.length > 0
-            ? `${low.map((p) => `${p.name} (${stock[p.id]} left)`).join(", ")} running low. Reorder 10 each from your supplier?`
-            : "Stock levels look healthy. Your best seller this week is the T-shirt."
+            ? `${low.map((p) => `${p.name} (${stock[p.id]} left)`).join(", ")} running low.`
+            : "Stock looks good."
         }
-        action={low.length > 0 ? "Approve reorder" : "Got it"}
+        action={low.length > 0 ? "Reorder" : "OK"}
       />
     </div>
   );
@@ -161,8 +161,8 @@ function HotelDemo() {
 
   const style: Record<Room, string> = {
     free: "border-foreground/20",
-    occupied: "border-emerald-600 bg-emerald-600 text-white",
-    cleaning: "border-amber-500 bg-amber-500/20 text-amber-600",
+    occupied: "border-accent bg-accent text-foreground",
+    cleaning: "border-amber-500 bg-amber-500/20 text-amber-500",
   };
 
   return (
@@ -174,7 +174,7 @@ function HotelDemo() {
       </div>
 
       <p className="mb-2 mt-4 text-xs font-semibold text-foreground/50">
-        Tap a room to change its status
+        Tap a room
       </p>
       <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
         {rooms.map((r, i) => (
@@ -193,10 +193,10 @@ function HotelDemo() {
         key={occupancy < 50 ? "low" : "ok"}
         text={
           occupancy < 50
-            ? `Only ${occupancy}% booked tonight. Send a 15% last-minute offer to guests who stayed before?`
-            : `${occupancy}% booked tonight. Raise tomorrow's rate by 10% while demand is high?`
+            ? `${occupancy}% full tonight. Offer past guests 15% off?`
+            : `${occupancy}% full tonight. Raise tomorrow's rate?`
         }
-        action={occupancy < 50 ? "Send offer" : "Raise rate"}
+        action={occupancy < 50 ? "Send offer" : "Raise 10%"}
       />
     </div>
   );
@@ -220,7 +220,7 @@ function SalonDemo() {
       </div>
 
       <p className="mb-2 mt-4 text-xs font-semibold text-foreground/50">
-        Tap a free slot to book it, or a booked slot to cancel
+        Tap a slot
       </p>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {slots.map((s) => {
@@ -230,12 +230,12 @@ function SalonDemo() {
               key={s}
               onClick={() => setBooked(isBooked ? booked.filter((x) => x !== s) : [...booked, s])}
               className={`rounded-xl border p-3 text-sm font-semibold transition active:scale-95 ${
-                isBooked ? "border-emerald-600 bg-emerald-600 text-white" : "border-foreground/20"
+                isBooked ? "border-accent bg-accent text-foreground" : "border-foreground/20"
               }`}
             >
               {s}
               <span className="block text-[10px] font-medium opacity-80">
-                {isBooked ? "Booked · Haircut $30" : "Free"}
+                {isBooked ? "Booked" : "Free"}
               </span>
             </button>
           );
@@ -246,8 +246,8 @@ function SalonDemo() {
         key={free > 4 ? "quiet" : "busy"}
         text={
           free > 4
-            ? `${free} free slots today. Text past clients a 10% same-day offer?`
-            : "Today is nearly full. Open Saturday's extra slots for online booking?"
+            ? `${free} slots free today. Text past clients?`
+            : "Almost full. Open more slots?"
         }
         action={free > 4 ? "Send offer" : "Open slots"}
       />
@@ -260,7 +260,7 @@ export default function ControlCenter() {
 
   return (
     <div>
-      <div role="tablist" className="mb-4 inline-flex rounded-full border border-foreground/15 p-1 text-sm font-semibold">
+      <div role="tablist" className="mb-4 inline-flex rounded-full border border-foreground/30 p-1 text-sm font-semibold">
         {tabs.map((t) => (
           <button
             key={t.id}
@@ -268,7 +268,7 @@ export default function ControlCenter() {
             aria-selected={tab === t.id}
             onClick={() => setTab(t.id)}
             className={`rounded-full px-5 py-1.5 transition ${
-              tab === t.id ? "bg-emerald-600 text-white" : "text-foreground/70 hover:text-foreground"
+              tab === t.id ? "bg-accent text-foreground" : "text-foreground/60 hover:text-foreground"
             }`}
           >
             {t.label}
@@ -276,7 +276,7 @@ export default function ControlCenter() {
         ))}
       </div>
 
-      <Window title={`Origo control center · ${tabs.find((t) => t.id === tab)?.label}`}>
+      <Window title={`Origo · ${tabs.find((t) => t.id === tab)?.label}`}>
         <div hidden={tab !== "shop"}>
           <ShopDemo />
         </div>
@@ -287,9 +287,7 @@ export default function ControlCenter() {
           <SalonDemo />
         </div>
       </Window>
-      <p className="mt-3 text-xs text-foreground/40">
-        Interactive demo with sample data. The real product is being built step by step.
-      </p>
+      <p className="mt-3 text-xs text-foreground/50">Demo · sample data</p>
     </div>
   );
 }

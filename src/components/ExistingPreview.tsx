@@ -1,24 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Window } from "./Mockups";
 
-const steps = [
-  "Tell us about your business",
-  "Add your menu, rooms or price list",
-  "Origo builds your site, booking and payments",
-];
+const steps = ["Your details", "Your rooms or menu", "Site live"];
 
 export default function ExistingPreview() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setStep((s) => (s + 1) % 5), 1800);
+    const t = setInterval(() => setStep((s) => (s + 1) % 5), 1700);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <Window title="Bring your business online">
+    <div>
       <ol className="space-y-2.5 text-sm">
         {steps.map((label, idx) => {
           const state = step > idx ? "done" : step === idx ? "active" : "todo";
@@ -27,53 +22,48 @@ export default function ExistingPreview() {
               <span
                 className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition ${
                   state === "done"
-                    ? "bg-emerald-600 text-white"
+                    ? "bg-foreground text-background"
                     : state === "active"
-                      ? "border-2 border-emerald-600 text-emerald-600"
-                      : "border border-foreground/20 text-foreground/40"
+                      ? "border-2 border-accent text-accent"
+                      : "border border-foreground/25 text-foreground/40"
                 }`}
               >
                 {state === "done" ? "✓" : idx + 1}
               </span>
-              <span className={state === "todo" ? "text-foreground/40" : ""}>{label}</span>
+              <span className={state === "todo" ? "text-foreground/40" : "font-medium"}>{label}</span>
             </li>
           );
         })}
       </ol>
 
-      <div className="mt-5 min-h-[13rem]">
+      <div className="mt-6 h-[20rem]">
         {step >= 3 && (
-          <div key={step === 4 ? "ready" : "building"} className="animate-pop">
-            <p className="flex items-center gap-2 text-xs font-semibold text-emerald-600">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              {step === 4 ? "Your website is live" : "Building…"}
+          <div key={step === 4 ? "live" : "building"} className="animate-pop">
+            <p className="mb-2 text-[11px] font-semibold tracking-widest uppercase text-foreground/50">
+              {step === 4 ? "Live" : "Building…"}
             </p>
-            <div className="mt-3 overflow-hidden rounded-xl border border-foreground/10">
-              <div className="bg-emerald-600/15 px-4 py-6">
-                <p className="text-lg font-extrabold">Palm View Guesthouse</p>
-                <p className="mt-1 text-xs text-foreground/60">12 rooms · Sea view · Breakfast included</p>
-                <span className="mt-3 inline-block rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white">
+            <div className="overflow-hidden rounded-2xl border border-foreground/20">
+              <div className="bg-accent px-4 py-8">
+                <p className="font-display text-3xl font-extrabold leading-none">Palm View Guesthouse</p>
+                <p className="mt-2 text-xs">12 rooms · Sea view</p>
+                <span className="mt-4 inline-block rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background">
                   Book a room
                 </span>
               </div>
-              <div className="grid grid-cols-3 divide-x divide-foreground/10 text-center text-xs">
+              <div className="grid grid-cols-2 divide-x divide-foreground/15 text-center text-xs">
                 <div className="p-3">
-                  <p className="font-bold">From $45</p>
+                  <p className="text-base font-bold">$45</p>
                   <p className="text-foreground/50">per night</p>
                 </div>
                 <div className="p-3">
-                  <p className="font-bold">Pay online</p>
-                  <p className="text-foreground/50">card or mobile</p>
-                </div>
-                <div className="p-3">
-                  <p className="font-bold">Live calendar</p>
-                  <p className="text-foreground/50">no double booking</p>
+                  <p className="text-base font-bold">Pay online</p>
+                  <p className="text-foreground/50">card · mobile</p>
                 </div>
               </div>
             </div>
           </div>
         )}
       </div>
-    </Window>
+    </div>
   );
 }
